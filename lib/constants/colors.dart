@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class BrandColors {
-  static Color blue = Color(0xFF3484E5);
+  static Color blue = Color(0xFF0166FF);
   static Color lightBlue = Color(0xFFD4E7FF);
   static Color white = Color(0xFFFAFAFA);
   static Color black = Color(0xFF1A1818);

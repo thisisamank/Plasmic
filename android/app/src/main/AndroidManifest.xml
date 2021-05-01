@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.visnstudio.covid_care">
+    <uses-permission android:name='android.permission.INTERNET permission'/>
    <application
-        android:label="covid_care"
+        android:label="Plasmic"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

@@ -1,5 +1,6 @@
 import 'package:covid_care/constants/colors.dart';
 import 'package:covid_care/screens/feed/feed.dart';
+import 'package:covid_care/screens/guidelines/guidelines.dart';
 import 'package:covid_care/screens/volunteer/volunteer_feed/volunteer_feed.dart';
 import 'package:covid_care/view_model/feed/feed_view_model.dart';
 import 'package:covid_care/view_model/volunteer/blood_group_view_model.dart';
@@ -29,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> _pages = [
     FeedPage(),
     VolunteerPage(),
+    GuidelinesPage(),
   ];
 
   @override
@@ -70,6 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             label: 'Volunteer',
           ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(
+              'images/guidelines.svg',
+              color: Colors.black,
+            ),
+            label: 'Guidelines',
+          ),
         ],
         onTap: _onTap,
         currentIndex: _currentIndex,
@@ -95,16 +104,17 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Container(
                   height: 300,
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(height: 10),
+                      SizedBox(height: 6),
                       Text(
                         "Filter",
                         style: textTheme.bodyText2
                             .copyWith(fontWeight: FontWeight.bold),
                       ),
+                      SizedBox(height: 10),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text("State", style: textTheme.bodyText2),
                           SizedBox(width: 25),
@@ -112,20 +122,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text("Blood Group", style: textTheme.bodyText2),
                           SizedBox(width: 25),
                           DropdownMenu<BloodGroupDropdownViewModel>(),
                         ],
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("City", style: textTheme.bodyText2),
-                          SizedBox(width: 25)
-                        ],
-                      ),
+                      SizedBox(height: 16),
                       MaterialButton(
                         onPressed: () {
                           final bloodGroup =
@@ -138,10 +142,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.pop(context);
                           }
                         },
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 24, vertical: 4),
                         color: BrandColors.blue,
                         textColor: BrandColors.white,
                         child: Text("Apply Filter"),
-                      )
+                      ),
+                      SizedBox(height: 16),
                     ],
                   )),
             ),

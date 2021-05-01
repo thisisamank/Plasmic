@@ -9,10 +9,12 @@ import 'package:covid_care/view_model/feed/feed_list_view_model.dart';
 import 'package:covid_care/view_model/feed/feed_view_model.dart';
 import 'package:covid_care/view_model/volunteer/blood_group_view_model.dart';
 import 'package:covid_care/view_model/volunteer/location_dropdown_view_model.dart';
+import 'package:covid_care/view_model/volunteer/month_view_model.dart';
 import 'package:covid_care/view_model/volunteer/question_item_view_model.dart';
 import 'package:covid_care/view_model/volunteer/questions_view_model.dart';
 import 'package:covid_care/view_model/volunteer/register_view_model.dart';
 import 'package:covid_care/view_model/volunteer/volunteer_feed/volunteer_feed_view_model.dart';
+import 'package:covid_care/view_model/volunteer/year_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -64,6 +66,12 @@ class Routes {
                     ),
                     ChangeNotifierProvider<RegisterVolunteerViewModel>(
                       create: (context) => RegisterVolunteerViewModel(),
+                    ),
+                    ChangeNotifierProvider<MonthDropdownViewModel>(
+                      create: (context) => MonthDropdownViewModel(),
+                    ),
+                    ChangeNotifierProvider<YearDropdownViewModel>(
+                      create: (context) => YearDropdownViewModel(),
                     ),
                   ],
                   child: RegisterPage(),

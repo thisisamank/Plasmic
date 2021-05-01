@@ -18,6 +18,7 @@ class RegisterVolunteerViewModel extends ChangeNotifier {
       covidMonth: covidMonth,
       phoneNumber: phoneNumber,
       location: location,
+      calledTimes: 0,
       isPaused: false,
     );
 
@@ -41,6 +42,5 @@ class RegisterVolunteerViewModel extends ChangeNotifier {
         .collection('plasma')
         .doc(location)
         .set({'empty-data': 'data'});
-    notifyListeners();
   }
 }

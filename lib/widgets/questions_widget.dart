@@ -22,16 +22,11 @@ class QuestionWidget extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyText2,
           ),
         ),
-        Theme(
-          data: Theme.of(context).copyWith(
-            unselectedWidgetColor: BrandColors.lightBlue,
-          ),
-          child: Checkbox(
-            activeColor: BrandColors.lightBlue,
-            checkColor: BrandColors.black,
-            value: questionItemsViewModel.question.isSelected,
-            onChanged: onChanged,
-          ),
+        Checkbox(
+          activeColor: BrandColors.blue,
+          checkColor: BrandColors.white,
+          value: questionItemsViewModel.question.isSelected,
+          onChanged: onChanged,
         ),
       ],
     );

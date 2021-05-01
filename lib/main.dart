@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     _loginViewModel = Provider.of<LoginViewModel>(context);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
       onUnknownRoute: (settings) => Routes.onUnknownRoute(settings),
       title: 'Flutter Demo',

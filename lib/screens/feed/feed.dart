@@ -1,13 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_care/constants/colors.dart';
 import 'package:covid_care/models/volunteer_model.dart';
+import 'package:covid_care/view_model/feed/feed_list_item_view_model.dart';
 import 'package:covid_care/view_model/feed/feed_list_view_model.dart';
 import 'package:covid_care/view_model/feed/feed_view_model.dart';
+import 'package:covid_care/view_model/volunteer/volunteer_feed/volunteer_feed_view_model.dart';
+import 'package:covid_care/view_model/volunteer/volunteer_feed/volunteer_item_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:toast/toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FeedPage extends StatelessWidget {
-  List<VolunteerModel> donars;
+  List<FeedListItemViewModel> donars;
   Size size;
   TextTheme textTheme;
   @override
@@ -49,22 +54,25 @@ class FeedPage extends StatelessWidget {
                                       children: [
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donars[index].name, "Name"),
+                                            donars[index].volunteer.name,
+                                            "Name"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donars[index].bloodGroup,
+                                            donars[index].volunteer.bloodGroup,
                                             "Blood Group"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donars[index].location, "Location"),
+                                            donars[index].volunteer.location,
+                                            "Location"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donars[index].covidMonth,
+                                            donars[index].volunteer.covidMonth,
                                             "Recovered\nfrom Covid"),
                                       ],
                                     ),
                                   ),
-                                  _callNowButton()
+                                  _callNowButton(
+                                      donars[index], feedViewModel, context)
                                 ],
                               ),
                             ),
@@ -81,8 +89,17 @@ class FeedPage extends StatelessWidget {
     );
   }
 
-  GestureDetector _callNowButton() {
+  GestureDetector _callNowButton(
+      FeedListItemViewModel itemViewModel, FeedViewModel viewModel, context) {
     return GestureDetector(
+      onTap: () {
+        Toast.show(
+            "Calling ${itemViewModel.volunteer.name} for Help!😀", context);
+        viewModel.updateCalled(itemViewModel);
+        Uri callUri =
+            Uri(scheme: 'tel', path: itemViewModel.volunteer.phoneNumber);
+        launch(callUri.toString());
+      },
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
@@ -112,7 +129,6 @@ class FeedPage extends StatelessWidget {
       children: [
         Text(
           "$title : ",
-          style: textTheme.bodyText1.copyWith(fontSize: 18.0),
         ),
         SizedBox(width: 4),
         Text(detail),

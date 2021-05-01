@@ -9,6 +9,7 @@ class VolunteerModel {
   final covidMonth;
   final phoneNumber;
   final isPaused;
+  var calledTimes = 0;
 
   VolunteerModel({
     //this.city,
@@ -19,12 +20,14 @@ class VolunteerModel {
     this.covidMonth,
     this.phoneNumber,
     this.isPaused,
+    this.calledTimes,
   });
 
   Map<String, dynamic> toMap() {
     return {
       "volunteerId": volunteerId,
       "name": name,
+      "calledTimes": calledTimes,
       //"city": city,
       "bloodGroup": bloodGroup,
       "location": location,
@@ -38,6 +41,7 @@ class VolunteerModel {
       QueryDocumentSnapshot querySnapshot) {
     final bloodGroup = querySnapshot['bloodGroup'];
     final volunteerId = querySnapshot['volunteerId'];
+    final calledTimes = querySnapshot['calledTimes'];
     final name = querySnapshot['name'];
     final location = querySnapshot['location'];
     //final city = querySnapshot['city'];
@@ -46,6 +50,7 @@ class VolunteerModel {
     final isPaused = querySnapshot['isPaused'];
     return VolunteerModel(
       volunteerId: volunteerId,
+      calledTimes: calledTimes,
       // city: city,
       name: name,
       location: location,

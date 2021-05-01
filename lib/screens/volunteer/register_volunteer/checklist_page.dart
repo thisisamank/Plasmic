@@ -14,7 +14,7 @@ class PlasmaVolunteerRegisterScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Terms and Condition',
+          'Terms and Conditions',
           style: TextStyle(color: BrandColors.black),
         ),
         backgroundColor: BrandColors.white,

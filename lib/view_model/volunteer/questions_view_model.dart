@@ -7,22 +7,22 @@ class QuestionsViewModel extends ChangeNotifier {
   List<QuestionItemViewModel> _questions = [
     QuestionItemViewModel(
       Question(
-          "I was a COVID Positive patientand, I have been cured for 14 days",
+          "I was a COVID Positive patient and, I have been cured for 14 days.",
           false),
     ),
-    QuestionItemViewModel(Question("I am negative now", false)),
-    QuestionItemViewModel(Question("I am between 18-60 years", false)),
-    QuestionItemViewModel(Question("I do not weigh less than 50kg", false)),
-    QuestionItemViewModel(Question("I have never been pregnant", false)),
-    QuestionItemViewModel(Question("I am not a diabetic person", false)),
+    QuestionItemViewModel(Question("I am negative now.", false)),
+    QuestionItemViewModel(Question("I am between 18-60 years.", false)),
+    QuestionItemViewModel(Question("I do not weigh less than 50kg.", false)),
+    QuestionItemViewModel(Question("I have never been pregnant.", false)),
+    QuestionItemViewModel(Question("I am not a diabetic person.", false)),
     QuestionItemViewModel(Question(
-        "My blood pressure not more than 140 and diastolic less than 60 or more than 90",
+        "My blood pressure not more than 140 and diastolic less than 60 or more than 90.",
         false)),
     QuestionItemViewModel(Question(
-        "I do not have other chronic disease with change in medication in last 28 days",
+        "I do not have any other chronic disease with change in medication in last 28 days.",
         false)),
     QuestionItemViewModel(
-        Question("I agree to donate plasma with my own concern", false)),
+        Question("I agree to donate plasma with my own concern.", false)),
   ];
 
   void markQuestion(QuestionItemViewModel question, bool isSelected) {

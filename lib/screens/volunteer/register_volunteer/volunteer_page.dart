@@ -1,5 +1,6 @@
 import 'package:covid_care/constants/colors.dart';
 import 'package:covid_care/routes/route_constants.dart';
+import 'package:covid_care/screens/home/home_screen.dart';
 import 'package:covid_care/screens/volunteer/volunteer_feed/volunteer_feed.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class VolunteerPage extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  "Register a new donar",
+                  "Register a new donor",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: BrandColors.white,

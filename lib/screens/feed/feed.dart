@@ -1,18 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:covid_care/constants/colors.dart';
-import 'package:covid_care/models/volunteer_model.dart';
 import 'package:covid_care/view_model/feed/feed_list_item_view_model.dart';
 import 'package:covid_care/view_model/feed/feed_list_view_model.dart';
 import 'package:covid_care/view_model/feed/feed_view_model.dart';
-import 'package:covid_care/view_model/volunteer/volunteer_feed/volunteer_feed_view_model.dart';
-import 'package:covid_care/view_model/volunteer/volunteer_feed/volunteer_item_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FeedPage extends StatelessWidget {
-  List<FeedListItemViewModel> donars;
+  List<FeedListItemViewModel> donors;
   Size size;
   TextTheme textTheme;
   @override
@@ -26,12 +23,12 @@ class FeedPage extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final feedList = FeedListViewModel.fromSnapshot(snapshot.data);
-                donars = feedList.donars;
+                donors = feedList.donors;
                 return Container(
                     width: size.width,
                     height: size.height,
                     child: ListView.builder(
-                      itemCount: donars.length,
+                      itemCount: donors.length,
                       itemBuilder: (context, index) {
                         return Center(
                           child: Padding(
@@ -54,25 +51,24 @@ class FeedPage extends StatelessWidget {
                                       children: [
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donars[index].volunteer.name,
-                                            "Name"),
+                                            'A Plasma donor', "Title"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donars[index].volunteer.bloodGroup,
+                                            donors[index].volunteer.bloodGroup,
                                             "Blood Group"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donars[index].volunteer.location,
+                                            donors[index].volunteer.location,
                                             "Location"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donars[index].volunteer.covidMonth,
+                                            donors[index].volunteer.covidMonth,
                                             "Recovered\nfrom Covid"),
                                       ],
                                     ),
                                   ),
                                   _callNowButton(
-                                      donars[index], feedViewModel, context)
+                                      donors[index], feedViewModel, context)
                                 ],
                               ),
                             ),

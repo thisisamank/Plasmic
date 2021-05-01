@@ -15,8 +15,10 @@ class MonthDropdownViewModel extends DropdownViewModel with ChangeNotifier {
   bool get isSelected => selectedItem != null;
 
   @override
-  Stream get dropdownItemsAsStream =>
-      FirebaseFirestore.instance.collection('months').snapshots();
+  Stream get dropdownItemsAsStream => FirebaseFirestore.instance
+      .collection('months')
+      .orderBy('index')
+      .snapshots();
 
   @override
   fromSnapshot(QuerySnapshot documentSnapshot) {

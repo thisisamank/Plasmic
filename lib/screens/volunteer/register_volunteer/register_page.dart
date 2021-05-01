@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:covid_care/constants/colors.dart';
 import 'package:covid_care/routes/route_constants.dart';
 import 'package:covid_care/view_model/volunteer/blood_group_view_model.dart';
@@ -51,7 +49,7 @@ class RegisterPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 24),
+                SizedBox(height: 8),
                 Text("Volunteer's Name",
                     style: textTheme.bodyText1.copyWith(fontSize: 18)),
                 SizedBox(height: 8),
@@ -86,6 +84,7 @@ class RegisterPage extends StatelessWidget {
                     DropdownMenu<StateDropdownViewModel>(),
                   ],
                 ),
+                //TODO: Add city field
                 SizedBox(height: 8),
                 Row(
                   children: [
@@ -94,6 +93,9 @@ class RegisterPage extends StatelessWidget {
                     DropdownMenu<BloodGroupDropdownViewModel>(),
                   ],
                 ),
+                SizedBox(height: 8),
+                Text("When did you recover from Covid 19?",
+                    style: textTheme.bodyText1.copyWith(fontSize: 18)),
                 SizedBox(height: 8),
                 Row(
                   children: [

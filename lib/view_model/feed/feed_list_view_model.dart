@@ -3,14 +3,14 @@ import 'package:covid_care/models/volunteer_model.dart';
 import 'package:covid_care/view_model/feed/feed_list_item_view_model.dart';
 
 class FeedListViewModel {
-  List<FeedListItemViewModel> donars = [];
-  FeedListViewModel(this.donars);
+  List<FeedListItemViewModel> donors = [];
+  FeedListViewModel(this.donors);
   factory FeedListViewModel.fromSnapshot(QuerySnapshot querySnapshot) {
-    var donars = querySnapshot.docs
+    var donors = querySnapshot.docs
         .map((item) => FeedListItemViewModel.fromSnapshot(item))
         .toList();
-    donars.sort(
+    donors.sort(
         (a, b) => a.volunteer.calledTimes.compareTo(b.volunteer.calledTimes));
-    return FeedListViewModel(donars);
+    return FeedListViewModel(donors);
   }
 }

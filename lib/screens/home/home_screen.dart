@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
+  static final scaffoldKey = GlobalKey<ScaffoldState>();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -33,6 +34,52 @@ class _HomeScreenState extends State<HomeScreen> {
     GuidelinesPage(),
   ];
 
+  AppBar getAppBar(int index, context) {
+    print(index);
+    switch (index) {
+      case 0:
+        return AppBar(
+          title: Text(
+            'Plasmic',
+            style: TextStyle(
+              color: BrandColors.blue,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: BrandColors.white,
+          actions: [
+            IconButton(
+                tooltip: 'Filter',
+                icon: SvgPicture.asset('images/filter.svg'),
+                onPressed: () => showHomeBottomSheet(context))
+          ],
+        );
+        break;
+      case 1:
+        return AppBar(
+          title: Text(
+            'Volunteer',
+            style: TextStyle(color: BrandColors.black),
+          ),
+          centerTitle: true,
+          backgroundColor: BrandColors.white,
+        );
+        break;
+      case 2:
+        return AppBar(
+          title: Text(
+            'Guidelines',
+            style: TextStyle(color: BrandColors.black),
+          ),
+          centerTitle: true,
+          backgroundColor: BrandColors.white,
+        );
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     _feedViewModel = Provider.of<FeedViewModel>(context);
@@ -41,24 +88,8 @@ class _HomeScreenState extends State<HomeScreen> {
     _bloodGroupDropdownViewModel =
         Provider.of<BloodGroupDropdownViewModel>(context, listen: false);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Plasmic',
-          style: TextStyle(
-            color: BrandColors.blue,
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: BrandColors.white,
-        actions: [
-          IconButton(
-              tooltip: 'Filter',
-              icon: SvgPicture.asset('images/filter.svg'),
-              onPressed: () => showHomeBottomSheet(context))
-        ],
-      ),
+      key: HomeScreen.scaffoldKey,
+      appBar: getAppBar(_currentIndex, context),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(

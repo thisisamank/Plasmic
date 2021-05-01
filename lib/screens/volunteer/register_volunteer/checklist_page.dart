@@ -4,7 +4,6 @@ import 'package:covid_care/view_model/volunteer/questions_view_model.dart';
 import 'package:covid_care/widgets/questions_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toast/toast.dart';
 
 class PlasmaVolunteerRegisterScreen extends StatelessWidget {
   @override
@@ -22,11 +21,11 @@ class PlasmaVolunteerRegisterScreen extends StatelessWidget {
       ),
       body: Consumer(
         builder: (context, QuestionsViewModel questionsViewModel, child) =>
-            SingleChildScrollView(
-          child: Container(
-            height: size.height,
-            width: 400,
-            padding: EdgeInsets.all(16),
+            Container(
+          height: size.height,
+          width: 400,
+          padding: EdgeInsets.all(16),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 ...questionsViewModel.questions
@@ -53,8 +52,6 @@ class PlasmaVolunteerRegisterScreen extends StatelessWidget {
                   onPressed: () {
                     if (questionsViewModel.isAllSelected) {
                       _validateAndNavigateToFormFilling(context);
-                    } else {
-                      Toast.show("You can only", context);
                     }
                   },
                   child: Text(

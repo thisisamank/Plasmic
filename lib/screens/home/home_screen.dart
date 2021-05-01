@@ -77,6 +77,16 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: BrandColors.white,
         );
         break;
+      default:
+        return AppBar(
+          title: Text(
+            'Unknown ',
+            style: TextStyle(color: BrandColors.black),
+          ),
+          centerTitle: true,
+          backgroundColor: BrandColors.white,
+        );
+        break;
     }
   }
 

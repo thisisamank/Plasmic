@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:covid_care/screens/volunteer/register_volunteer/volunteer_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:upgrader/upgrader.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -39,13 +40,22 @@ class _HomeScreenState extends State<HomeScreen> {
     switch (index) {
       case 0:
         return AppBar(
-          title: Text(
-            'Plasmic',
-            style: TextStyle(
-              color: BrandColors.blue,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                'images/logo.svg',
+                width: 56,
+              ),
+              Text(
+                'Plasmic',
+                style: TextStyle(
+                  color: BrandColors.blue,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
           ),
           centerTitle: true,
           backgroundColor: BrandColors.white,
@@ -124,7 +134,13 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: _onTap,
         currentIndex: _currentIndex,
       ),
-      body: _pages[_currentIndex],
+      body: UpgradeAlert(
+        showIgnore: false,
+        child: IndexedStack(
+          index: _currentIndex,
+          children: _pages,
+        ),
+      ),
     );
   }
 

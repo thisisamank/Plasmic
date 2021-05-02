@@ -22,10 +22,6 @@ class RegisterVolunteerViewModel extends ChangeNotifier {
       isPaused: false,
     );
 
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .set({'empty-data': 'data'});
     final docRef = await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser.uid)
@@ -38,6 +34,7 @@ class RegisterVolunteerViewModel extends ChangeNotifier {
         .collection(location)
         .doc(docRef.id)
         .set(volunteerModel.toMap());
+
     FirebaseFirestore.instance
         .collection('plasma')
         .doc(location)

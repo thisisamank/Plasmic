@@ -1,5 +1,4 @@
 import 'package:covid_care/constants/colors.dart';
-import 'package:covid_care/models/user_model.dart';
 import 'package:covid_care/routes/route_constants.dart';
 import 'package:covid_care/view_model/login/login_view_model.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +26,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   Text(
                     "LET'S FIGHT",
-                    style: GoogleFonts.bebasNeue(
-                      fontSize: 48,
-                    ),
+                    style: GoogleFonts.bebasNeue(fontSize: 48),
                   ),
                   Text(
                     "Corona",
@@ -38,9 +35,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   Text(
                     "Together",
-                    style: GoogleFonts.bebasNeue(
-                      fontSize: 48,
-                    ),
+                    style: GoogleFonts.bebasNeue(fontSize: 48),
                   ),
                 ],
               ),

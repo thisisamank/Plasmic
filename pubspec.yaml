@@ -21,6 +21,7 @@ dependencies:
   google_sign_in: ^4.5.1
   provider: ^5.0.0
   toast: ^0.1.5
+  upgrader: ^3.2.1
 
 dev_dependencies:
   flutter_test:

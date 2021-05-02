@@ -2,6 +2,8 @@
 
 Mobile application to help plasma donors and plasma receivers at one place.
 
+<img src="public/poster.png" alt="bloodGroup" />
+
 ## Getting Started
 
 Technology Used:
@@ -57,5 +59,7 @@ Make a new project on firebase and add a new application with these details:
 
 If you are stuck at any point, you can always email me at thisisamank@gmail.com and I will me more than happy to help you with it 😀
 
+## TODO:
 
-
+- 
+- 

@@ -1,4 +1,4 @@
-#  <img src="public/logo.png" alt="bloodGroup" style="zoom:1%;" /> Plasmic
+# <img src="./public/logo.png" width="40px"> Plasmic
 
 Mobile application to help plasma donors and plasma receivers at one place.
 

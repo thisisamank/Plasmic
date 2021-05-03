@@ -42,7 +42,7 @@ class QuestionsViewModel extends ChangeNotifier {
     if (result)
       message = "";
     else
-      message = "You can only proceed if you agree to above";
+      message = "You can only donate if all of this applies to you.";
     notifyListeners();
     return result;
   }

@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 
 class RegisterVolunteerViewModel extends ChangeNotifier {
   var name;
-  var location;
+  var city;
+  var state;
   var bloodGroup;
   var covidMonth;
   var phoneNumber;
@@ -14,10 +15,11 @@ class RegisterVolunteerViewModel extends ChangeNotifier {
     VolunteerModel volunteerModel = VolunteerModel(
       volunteerId: FirebaseAuth.instance.currentUser.uid,
       name: name,
+      city: city,
       bloodGroup: bloodGroup,
       covidMonth: covidMonth,
       phoneNumber: phoneNumber,
-      location: location,
+      location: state,
       calledTimes: 0,
       isPaused: false,
     );
@@ -30,14 +32,26 @@ class RegisterVolunteerViewModel extends ChangeNotifier {
 
     FirebaseFirestore.instance
         .collection('plasma')
-        .doc(location)
-        .collection(location)
+        .doc(state)
+        .collection(state)
         .doc(docRef.id)
         .set(volunteerModel.toMap());
 
     FirebaseFirestore.instance
         .collection('plasma')
-        .doc(location)
+        .doc(state)
         .set({'empty-data': 'data'});
+  }
+
+  Future<bool> isPresent() async {
+    var dataLength;
+    final data = await FirebaseFirestore.instance
+        .collection('plasma')
+        .doc(state)
+        .collection(state)
+        .where('phoneNumber', isEqualTo: phoneNumber)
+        .get();
+
+    return data.docs.length != 0;
   }
 }

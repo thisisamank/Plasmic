@@ -51,14 +51,15 @@ class FeedPage extends StatelessWidget {
                                       children: [
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            'A Plasma donor', "Title"),
+                                            donors[index].volunteer.name,
+                                            "Name"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(
                                             donors[index].volunteer.bloodGroup,
                                             "Blood Group"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(
-                                            donors[index].volunteer.location,
+                                            '${donors[index].volunteer.city}, ${donors[index].volunteer.location}',
                                             "Location"),
                                         SizedBox(height: 8),
                                         _cardTextWidget(

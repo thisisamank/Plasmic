@@ -1,5 +1,4 @@
 import 'package:covid_care/constants/colors.dart';
-import 'package:covid_care/constants/theme.dart';
 import 'package:covid_care/view_model/volunteer/question_item_view_model.dart';
 import 'package:flutter/material.dart';
 

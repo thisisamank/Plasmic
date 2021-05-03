@@ -108,7 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
     _bloodGroupDropdownViewModel =
         Provider.of<BloodGroupDropdownViewModel>(context, listen: false);
     return Scaffold(
-      key: HomeScreen.scaffoldKey,
       appBar: getAppBar(_currentIndex, context),
       bottomNavigationBar: BottomNavigationBar(
         items: [

@@ -1,5 +1,6 @@
 import 'package:covid_care/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class GuidelinesPage extends StatelessWidget {
   @override
@@ -8,13 +9,15 @@ class GuidelinesPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          child: Center(
-            child: Text("Guidelines"),
-          ),
+        Card(
+          child: Text(""),
         ),
+        Text("Guidelines and more resources \nto be added soon"),
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Share.share(
+                'Download Plasmic to get in touch with plasma donars. link: https://play.google.com/store/apps/details?id=com.visnstudios.covid_care');
+          },
           child: Container(
             height: 50,
             width: size.width,

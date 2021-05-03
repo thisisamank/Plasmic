@@ -4,7 +4,7 @@ class VolunteerModel {
   final volunteerId;
   final name;
   final location;
-  // final city;
+  final city;
   final bloodGroup;
   final covidMonth;
   final phoneNumber;
@@ -12,7 +12,7 @@ class VolunteerModel {
   var calledTimes = 0;
 
   VolunteerModel({
-    //this.city,
+    this.city,
     this.volunteerId,
     this.name,
     this.location,
@@ -28,7 +28,7 @@ class VolunteerModel {
       "volunteerId": volunteerId,
       "name": name,
       "calledTimes": calledTimes,
-      //"city": city,
+      "city": city,
       "bloodGroup": bloodGroup,
       "location": location,
       "covidMonth": covidMonth,
@@ -39,19 +39,25 @@ class VolunteerModel {
 
   factory VolunteerModel.fromQuerySnapshot(
       QueryDocumentSnapshot querySnapshot) {
+    var city = null;
     final bloodGroup = querySnapshot['bloodGroup'];
     final volunteerId = querySnapshot['volunteerId'];
     final calledTimes = querySnapshot['calledTimes'];
     final name = querySnapshot['name'];
     final location = querySnapshot['location'];
-    //final city = querySnapshot['city'];
+    //TODO: will be changed with new data
+    try {
+      city = querySnapshot['city'];
+    } catch (e) {
+      city = 'Unknown';
+    }
     final covidMonth = querySnapshot['covidMonth'];
     final phoneNumber = querySnapshot['phoneNumber'];
     final isPaused = querySnapshot['isPaused'];
     return VolunteerModel(
       volunteerId: volunteerId,
       calledTimes: calledTimes,
-      // city: city,
+      city: city,
       name: name,
       location: location,
       covidMonth: covidMonth,

@@ -14,6 +14,7 @@ class RegisterPage extends StatelessWidget {
   var _formKey = GlobalKey<FormState>();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _phoneController = TextEditingController();
+  TextEditingController _cityController = TextEditingController();
 
   RegisterVolunteerViewModel _registerViewModel;
   StateDropdownViewModel _locationsDropdownViewModel;
@@ -73,6 +74,19 @@ class RegisterPage extends StatelessWidget {
                   validator: _phoneValidator,
                   decoration: InputDecoration(
                     hintText: 'Your contact number?',
+                    border: OutlineInputBorder(gapPadding: 0),
+                  ),
+                ),
+                SizedBox(height: 24),
+                Text("Your City",
+                    style: textTheme.bodyText1.copyWith(fontSize: 18)),
+                SizedBox(height: 8),
+                TextFormField(
+                  onChanged: (value) => _registerViewModel.city = value,
+                  controller: _cityController,
+                  validator: _stringValidator,
+                  decoration: InputDecoration(
+                    hintText: 'What\'s your city?',
                     border: OutlineInputBorder(gapPadding: 0),
                   ),
                 ),
@@ -140,7 +154,7 @@ class RegisterPage extends StatelessWidget {
       return "Please Enter correct contact number";
   }
 
-  _registerVolunteer(context) {
+  _registerVolunteer(context) async {
     if (!(_formKey.currentState.validate() &&
         _locationsDropdownViewModel.isSelected &&
         _bloodGroupDropdownViewModel.isSelected &&
@@ -151,9 +165,13 @@ class RegisterPage extends StatelessWidget {
       _registerViewModel.covidMonth =
           '${_monthDropdownViewModel.selectedItem}, ${_yearDropdownViewModel.selectedItem}';
       _registerViewModel.bloodGroup = _bloodGroupDropdownViewModel.selectedItem;
-      _registerViewModel.location = _locationsDropdownViewModel.selectedItem;
-      _registerViewModel.saveVolunteer();
-      Toast.show("Volunteer Saved 🙏", context);
+      _registerViewModel.state = _locationsDropdownViewModel.selectedItem;
+      if (await _registerViewModel.isPresent()) {
+        Toast.show("Volunteer already present 😃", context, duration: 2);
+      } else {
+        _registerViewModel.saveVolunteer();
+        Toast.show("Volunteer Saved 🙏", context);
+      }
 
       Navigator.pushNamedAndRemoveUntil(
           context, RouteNames.home, (route) => false);

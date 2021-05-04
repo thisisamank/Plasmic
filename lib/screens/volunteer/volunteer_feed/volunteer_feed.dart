@@ -3,6 +3,7 @@ import 'package:covid_care/constants/colors.dart';
 import 'package:covid_care/view_model/volunteer/volunteer_feed/volunteer_feed_view_model.dart';
 import 'package:covid_care/view_model/volunteer/volunteer_feed/volunteer_item_view_model.dart';
 import 'package:covid_care/view_model/volunteer/volunteer_feed/volunteer_list_view_model.dart';
+import 'package:covid_care/widgets/not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
@@ -20,95 +21,103 @@ class VolunteerFeed extends StatelessWidget {
         return StreamBuilder<QuerySnapshot>(
             stream: volunteerFeedViewModel.volunteerDetailsAsStream,
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.active) {
                 final feedList =
                     VolunteerListViewModel.fromSnapshot(snapshot.data);
                 volunteers = feedList.volunteers;
-                return Expanded(
-                    child: ListView.builder(
-                  itemCount: volunteers.length,
-                  itemBuilder: (context, index) {
-                    return Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: BrandColors.lightBlue,
-                          ),
-                          height: 200,
-                          width: size.width * .8,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 8),
-                                    _cardTextWidget(
-                                        volunteers[index].volunteer.name,
-                                        "Name"),
-                                    SizedBox(height: 8),
-                                    _cardTextWidget(
-                                        volunteers[index].volunteer.bloodGroup,
-                                        "Blood Group"),
-                                    SizedBox(height: 8),
-                                    _cardTextWidget(
-                                        volunteers[index].volunteer.location,
-                                        "Location"),
-                                    SizedBox(height: 8),
-                                    _cardTextWidget(
-                                        volunteers[index].volunteer.covidMonth,
-                                        "Recovered\nfrom Covid"),
-                                  ],
+                if (volunteers.isNotEmpty) {
+                  return Expanded(
+                      child: ListView.builder(
+                    itemCount: volunteers.length,
+                    itemBuilder: (context, index) {
+                      return Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: BrandColors.lightBlue,
+                            ),
+                            height: 200,
+                            width: size.width * .8,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: Column(
+                                    children: [
+                                      SizedBox(height: 8),
+                                      _cardTextWidget(
+                                          volunteers[index].volunteer.name,
+                                          "Name"),
+                                      SizedBox(height: 8),
+                                      _cardTextWidget(
+                                          volunteers[index]
+                                              .volunteer
+                                              .bloodGroup,
+                                          "Blood Group"),
+                                      SizedBox(height: 8),
+                                      _cardTextWidget(
+                                          '${volunteers[index].volunteer.location}, ${volunteers[index].volunteer.city}',
+                                          "Location"),
+                                      SizedBox(height: 8),
+                                      _cardTextWidget(
+                                          volunteers[index]
+                                              .volunteer
+                                              .covidMonth,
+                                          "Recovered\nfrom Covid"),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              _pauseAndDeleteButton(() {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return Center(
-                                        child: Container(
-                                          width: 250,
-                                          height: 100,
-                                          color: Colors.white,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              SizedBox(height: 10),
-                                              Text("Are you sure?"),
-                                              SizedBox(height: 10),
-                                              MaterialButton(
-                                                minWidth: 100,
-                                                onPressed: () {
-                                                  volunteerFeedViewModel
-                                                      .deleteVolunteer(
-                                                          volunteers[index]);
-                                                  Toast.show(
-                                                      "Volunteer deleted sucessfully!",
-                                                      context);
-                                                  Navigator.pop(context);
-                                                },
-                                                color: BrandColors.red,
-                                                textColor: Colors.white,
-                                                child: Text("Delete"),
-                                              ),
-                                            ],
+                                _pauseAndDeleteButton(() {
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return Center(
+                                          child: Container(
+                                            width: 250,
+                                            height: 100,
+                                            color: Colors.white,
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SizedBox(height: 10),
+                                                Text("Are you sure?"),
+                                                SizedBox(height: 10),
+                                                MaterialButton(
+                                                  minWidth: 100,
+                                                  onPressed: () {
+                                                    volunteerFeedViewModel
+                                                        .deleteVolunteer(
+                                                            volunteers[index]);
+                                                    Toast.show(
+                                                        "Volunteer deleted sucessfully!",
+                                                        context);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  color: BrandColors.red,
+                                                  textColor: Colors.white,
+                                                  child: Text("Delete"),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    });
-                              })
-                            ],
+                                        );
+                                      });
+                                })
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ));
+                      );
+                    },
+                  ));
+                } else {
+                  return VolunteerNotFound("Register a donar too see here");
+                }
               } else
                 return Center(
                     child: CircularProgressIndicator(

@@ -26,6 +26,8 @@ class VolunteerFeedViewModel extends ChangeNotifier {
         .delete();
   }
 
+  /// this method is not currently in use but plan is to implement feature of pausing account
+  /// there this will come handy
   void pauseVolunteer(VolunteerListItemViewModel viewModel) {
     FirebaseFirestore.instance
         .collection('users')

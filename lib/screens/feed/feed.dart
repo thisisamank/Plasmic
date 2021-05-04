@@ -3,6 +3,7 @@ import 'package:covid_care/constants/colors.dart';
 import 'package:covid_care/view_model/feed/feed_list_item_view_model.dart';
 import 'package:covid_care/view_model/feed/feed_list_view_model.dart';
 import 'package:covid_care/view_model/feed/feed_view_model.dart';
+import 'package:covid_care/widgets/not_found.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toast/toast.dart';
@@ -21,66 +22,76 @@ class FeedPage extends StatelessWidget {
         return StreamBuilder<QuerySnapshot>(
             stream: feedViewModel.donarsAsStream(),
             builder: (context, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.connectionState == ConnectionState.active) {
                 final feedList = FeedListViewModel.fromSnapshot(snapshot.data);
-                donors = feedList.donors;
-                return Container(
-                    width: size.width,
-                    height: size.height,
-                    child: ListView.builder(
-                      itemCount: donors.length,
-                      itemBuilder: (context, index) {
-                        return Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: BrandColors.lightBlue,
-                              ),
-                              height: 200,
-                              width: size.width * .8,
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 8),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(height: 8),
-                                        _cardTextWidget(
-                                            donors[index].volunteer.name,
-                                            "Name"),
-                                        SizedBox(height: 8),
-                                        _cardTextWidget(
-                                            donors[index].volunteer.bloodGroup,
-                                            "Blood Group"),
-                                        SizedBox(height: 8),
-                                        _cardTextWidget(
-                                            '${donors[index].volunteer.city}, ${donors[index].volunteer.location}',
-                                            "Location"),
-                                        SizedBox(height: 8),
-                                        _cardTextWidget(
-                                            donors[index].volunteer.covidMonth,
-                                            "Recovered\nfrom Covid"),
-                                      ],
+                if (feedList.donors.length > 0) {
+                  donors = feedList.donors;
+                  return Container(
+                      width: size.width,
+                      height: size.height,
+                      child: ListView.builder(
+                        itemCount: donors.length,
+                        itemBuilder: (context, index) {
+                          return Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: BrandColors.lightBlue,
+                                ),
+                                height: 200,
+                                width: size.width * .8,
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      child: Column(
+                                        children: [
+                                          SizedBox(height: 8),
+                                          _cardTextWidget(
+                                              donors[index].volunteer.name,
+                                              "Name"),
+                                          SizedBox(height: 8),
+                                          _cardTextWidget(
+                                              donors[index]
+                                                  .volunteer
+                                                  .bloodGroup,
+                                              "Blood Group"),
+                                          SizedBox(height: 8),
+                                          _cardTextWidget(
+                                              '${donors[index].volunteer.city}, ${donors[index].volunteer.location}',
+                                              "Location"),
+                                          SizedBox(height: 8),
+                                          _cardTextWidget(
+                                              donors[index]
+                                                  .volunteer
+                                                  .covidMonth,
+                                              "Recovered\nfrom Covid"),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  _callNowButton(
-                                      donors[index], feedViewModel, context)
-                                ],
+                                    _callNowButton(
+                                        donors[index], feedViewModel, context)
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    ));
-              } else
+                          );
+                        },
+                      ));
+                } else {
+                  return VolunteerNotFound(
+                      "No Donars found for this blood group");
+                }
+              } else {
                 return Center(
                     child: CircularProgressIndicator(
                         backgroundColor: BrandColors.blue));
+              }
             });
       },
     );

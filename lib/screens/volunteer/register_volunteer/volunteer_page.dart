@@ -14,6 +14,7 @@ class VolunteerPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          SizedBox(),
           VolunteerFeed(),
           GestureDetector(
             onTap: () {

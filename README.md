@@ -1,6 +1,6 @@
 # <img src="./public/logo.png" width="40px"> Plasmic
 
-Mobile application to help plasma donors and plasma receivers at one place.
+Mobile application to help plasma donors and plasma receivers at one place. [google play](https://play.google.com/store/apps/details?id=com.visnstudios.covid_care)
 
 <img src="public/poster.png" alt="bloodGroup" />
 
